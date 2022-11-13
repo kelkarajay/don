@@ -5,14 +5,14 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/stretchr/testify/assert"
 )
 
 func TestDecodeImpliedActivity1(t *testing.T) {
 	var f Feed
-	if err := xml.Unmarshal([]byte(fixtureImpliedActivity1), &f); err != nil {
-		panic(err)
-	}
+	require.NoError(t, xml.Unmarshal([]byte(fixtureImpliedActivity1), &f))
 
 	assert.Equal(t, "newsstream timeline", f.Title, "Feed.Title")
 	assert.Equal(t, "https://quitter.im/api/statuses/user_timeline/235.atom", f.ID, "Feed.ID")
@@ -59,9 +59,7 @@ func TestDecodeImpliedActivity1(t *testing.T) {
 
 func TestDecodeImpliedActivity2(t *testing.T) {
 	var f Feed
-	if err := xml.Unmarshal([]byte(fixtureImpliedActivity2), &f); err != nil {
-		panic(err)
-	}
+	require.NoError(t, xml.Unmarshal([]byte(fixtureImpliedActivity2), &f))
 
 	assert.Equal(t, "✨ Milan 🐘", f.Title, "Feed.Title")
 	assert.Equal(t, "https://social.tchncs.de/users/milan.atom", f.ID, "Feed.ID")
@@ -99,9 +97,7 @@ func TestDecodeImpliedActivity2(t *testing.T) {
 
 func TestDecodeNestedActivity(t *testing.T) {
 	var f Feed
-	if err := xml.Unmarshal([]byte(fixtureNested), &f); err != nil {
-		panic(err)
-	}
+	require.NoError(t, xml.Unmarshal([]byte(fixtureNested), &f))
 
 	assert.Equal(t, "lambadalambda timeline", f.Title, "Feed.Title")
 	assert.Equal(t, "https://social.heldscal.la/api/statuses/user_timeline/23211.atom", f.ID, "Feed.ID")
@@ -158,9 +154,7 @@ func TestDecodeNestedActivity(t *testing.T) {
 
 func TestDecodeFavoriteActivity(t *testing.T) {
 	var f Feed
-	if err := xml.Unmarshal([]byte(fixtureFavorite), &f); err != nil {
-		panic(err)
-	}
+	require.NoError(t, xml.Unmarshal([]byte(fixtureFavorite), &f))
 
 	assert.Equal(t, "lambadalambda timeline", f.Title, "Feed.Title")
 	assert.Equal(t, "https://social.heldscal.la/api/statuses/user_timeline/23211.atom", f.ID, "Feed.ID")
